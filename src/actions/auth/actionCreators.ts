@@ -1,22 +1,12 @@
+import { LoginData, ResponseUserData, UserData } from './interfaces';
 import types from './types';
-
-interface UserData {
-  email: string
-  username: string
-  password: string
-}
-
-interface LoginData {
-  email: string
-  password: string
-}
 
 export const registration = (userData: UserData) => ({
   type: types.REGISTRATION,
   payload: userData
 })
 
-export const registrationSuccess = (userData: any) => ({
+export const registrationSuccess = (userData: ResponseUserData) => ({
   type: types.REGISTRATION_SUCCESS,
   payload: userData
 })
@@ -31,7 +21,7 @@ export const login = (loginData: LoginData) => ({
   payload: loginData
 })
 
-export const loginSuccess = (userData: any) => ({
+export const loginSuccess = (userData: ResponseUserData) => ({
   type: types.LOGIN_SUCCESS,
   payload: userData
 })
@@ -46,9 +36,9 @@ export const setCurrentUser = (token: string | null) => ({
   payload: token
 })
 
-export const setCurrentUserSuccess = (token: string) => ({
+export const setCurrentUserSuccess = (userData: ResponseUserData) => ({
   type: types.SET_CURRENT_USER_SUCCESS,
-  payload: token
+  payload: userData
 })
 
 export const setCurrentUserFailed = (message: string) => ({

@@ -9,6 +9,7 @@ import {
 import { setAuthToken } from '../../utils/setAuthToken';
 import types from './types';
 import { getErrorMessage } from '../../utils/getErrorMessage';
+import { LoginData, UserData } from './interfaces';
 
 interface ServerResponse {
   config?: any,
@@ -19,20 +20,9 @@ interface ServerResponse {
   statusText?: string
 }
 
-interface UserData {
-  email: string
-  username: string
-  password: string
-}
-
 interface UserDataPayload {
   type: string
   payload: UserData
-}
-
-interface LoginData {
-  email: string
-  password: string
 }
 
 interface LoginDataPayload {
@@ -45,8 +35,6 @@ interface CurrentUserPayload {
   payload: string
 }
 
-type JWTDecodeType = string | { [key: string]: any; } | null;
-
 function* registerUser(action: UserDataPayload) {
   try {
     const { payload } = action;
@@ -54,7 +42,7 @@ function* registerUser(action: UserDataPayload) {
     const token: string = response.data.token;
     localStorage.setItem('token', token);
     setAuthToken(token);
-    const decoded: JWTDecodeType = decode(token);
+    const decoded: any = decode(token);
     yield put(registrationSuccess(decoded));
   }
   catch (error) {
@@ -70,7 +58,7 @@ function* loginUser(action: LoginDataPayload) {
     const token: string = response.data.token;
     localStorage.setItem('token', token);
     setAuthToken(token);
-    const decoded: JWTDecodeType = decode(token);
+    const decoded: any = decode(token);
     yield put(loginSuccess(decoded));
   }
   catch (error) {
