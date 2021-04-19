@@ -1,0 +1,16 @@
+@import "../../utils/variables";
+
+.menu {
+  position: fixed;
+  top: 5vh;
+  left: -100%;
+  width: 15vw;
+  height: 95vh;
+  background: $primary_color_blue_1;
+  transition: 0.5s;
+}
+
+.active {
+  left: 0;
+  transition: 0.5s;
+}

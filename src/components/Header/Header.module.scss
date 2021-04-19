@@ -1,0 +1,23 @@
+@import "../../utils/variables";
+
+.header {
+  position: fixed;
+  @include flex-align-center;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 5vh;
+  background: $primary_color_blue_2;
+  padding: 0 1vw;
+
+  h1 {
+    font-family: "Akaya Telivigala", sans-serif;
+    color: $white;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

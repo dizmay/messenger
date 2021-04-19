@@ -1,0 +1,79 @@
+@import "../../utils/variables";
+
+.container {
+  @include hundred-percent-size;
+  @include flex-center;
+
+  form {
+    width: 25%;
+    flex-direction: column;
+    @include flex-align-center;
+    justify-content: space-evenly;
+    padding: 1.5rem;
+    background: $primary_color_blue_1;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.5);
+
+    & > * {
+      margin-top: 2rem;
+    }
+
+    & > *:first-child {
+      margin-top: 1rem;
+    }
+
+    & > *:last-child {
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      color: $white;
+    }
+
+    & > div {
+      width: 75%;
+      @include flex-align-center;
+      flex-direction: column;
+      color: $white;
+
+      input {
+        width: 100%;
+        padding: 0.1rem;
+        font-size: 1.1rem;
+        background: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 0.1rem solid $primary_color_blue_4;
+        color: $white;
+
+        &::placeholder {
+          color: $primary_color_blue_4;
+        }
+
+        &:focus {
+          border-bottom: 0.15rem solid $white;
+        }
+      }
+
+      label {
+        align-self: flex-start;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    button {
+      background: $primary_color_blue_2;
+      padding: 0.5rem 1.5rem;
+      transition: 0.2s background ease-in-out;
+
+      &:hover {
+        background: $primary_color_blue_4;
+      }
+    }
+
+    a {
+      color: $white;
+    }
+  }
+}
