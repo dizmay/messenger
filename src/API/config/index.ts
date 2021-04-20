@@ -29,6 +29,26 @@ export class HttpClient implements IHttpClient {
     })
   }
 
+  getOne<T, P>(params: IHttpClientReqParamsWithPayload<P>): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      const { requiresToken, url, payload } = params;
+      const requestUrl = this.config.baseURL + url;
+      this.config = payload;
+
+      if (requiresToken) {
+        this.config.headers.Authorization = `Bearer ${this.token}`;
+      }
+
+      axios.get(requestUrl, this.config)
+        .then((response: AxiosResponse) => {
+          resolve(response.data)
+        })
+        .catch((err: AxiosError) => {
+          reject(getErrorMessage(err))
+        })
+    })
+  }
+
   post<T, P>(params: IHttpClientReqParamsWithPayload<P>): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       const { payload, url, requiresToken } = params;
@@ -39,6 +59,45 @@ export class HttpClient implements IHttpClient {
       }
 
       axios.post(requestUrl, payload, this.config)
+        .then((response: AxiosResponse) => {
+          resolve(response.data)
+        })
+        .catch((err: AxiosError) => {
+          reject(getErrorMessage(err))
+        })
+    })
+  }
+
+  put<T, P>(params: IHttpClientReqParamsWithPayload<P>): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      const { payload, url, requiresToken } = params;
+      const requestUrl = this.config.baseURL + url;
+
+      if (requiresToken) {
+        this.config.headers.Authorization = `Bearer ${this.token}`;
+      }
+
+      axios.put(requestUrl, payload, this.config)
+        .then((response: AxiosResponse) => {
+          resolve(response.data)
+        })
+        .catch((err: AxiosError) => {
+          reject(getErrorMessage(err))
+        })
+    })
+  }
+
+  delete<T, P>(params: IHttpClientReqParamsWithPayload<P>): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      const { payload, url, requiresToken } = params;
+      const requestUrl = this.config.baseURL + url;
+      this.config.params = payload;
+
+      if (requiresToken) {
+        this.config.headers.Authorization = `Bearer ${this.token}`;
+      }
+
+      axios.delete(requestUrl, this.config)
         .then((response: AxiosResponse) => {
           resolve(response.data)
         })
