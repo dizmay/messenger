@@ -1,0 +1,24 @@
+$primary_color_blue_1: #1a1f2b;
+$primary_color_blue_2: #30395c;
+$primary_color_blue_3: #4a6491;
+$primary_color_blue_4: #85a5cc;
+$primary_color_blue_5: #d0e4f2;
+
+$black: #000000;
+$white: #ffffff;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin hundred-percent-size {
+  width: 100%;
+  height: 100%;
+}
