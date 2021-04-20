@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../../actions/auth/actionCreators';
+import { login } from '../../../reducers/authReducer';
+import { LoginData } from '../../../actions/auth/interfaces';
 import { selectIsError, selectIsLoading, selectMessage } from '../../../selectors/auth';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import Login from './Login';
 
 const LoginContainer = () => {
 
-  const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
-  const message = useSelector(selectMessage);
+  const isLoading = useAppSelector(selectIsLoading);
+  const isError = useAppSelector(selectIsError);
+  const message = useAppSelector(selectMessage);
   
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const loginUser = useCallback(
-    (loginData) => dispatch(login(loginData)),
+    (loginData: LoginData) => dispatch(login(loginData)),
     [dispatch]
   )
 

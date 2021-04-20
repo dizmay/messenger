@@ -16,3 +16,5 @@ export interface LoginData {
   email: string
   password: string
 }
+
+export type JwtDecodeType = null | { [key: string]: any } | string

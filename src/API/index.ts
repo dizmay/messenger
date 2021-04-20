@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-const baseURL = 'http://localhost:8080/api/';
+import { httpClient } from './config';
 
 interface RegistrationData {
   email: string
@@ -14,11 +12,21 @@ interface LoginData {
 }
 
 export const authAPI = {
-  createUser(userData: RegistrationData) {
-    return axios.post(`${baseURL}auth/registration`, userData)
+  createUser(userData: RegistrationData): Promise<string> {
+    const getParams = {
+      url: 'auth/registration',
+      payload: userData,
+      requiresToken: false,
+    }
+    return httpClient.post<string, RegistrationData>(getParams);
   },
 
-  loginUser(userData: LoginData) {
-    return axios.post(`${baseURL}auth/login`, userData)
+  loginUser(userData: LoginData): Promise<string> {
+    const getParams = {
+      url: 'auth/login',
+      payload: userData,
+      requiresToken: false,
+    }
+    return httpClient.post<string, LoginData>(getParams);
   }
 }

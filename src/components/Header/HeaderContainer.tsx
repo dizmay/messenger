@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../actions/auth/actionCreators';
+import { logout } from '../../reducers/authReducer';
 import Header from './Header';
 
-interface iProps {
+interface IProps {
   handleClick: () => void
   isLogged: boolean | null
 }
 
-const HeaderContainer: React.FC<iProps> = ({ handleClick, isLogged }) => {
+const HeaderContainer: React.FC<IProps> = ({ handleClick, isLogged }) => {
 
   const dispatch = useDispatch();
   const logoutUser = useCallback(

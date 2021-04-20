@@ -1,14 +1,14 @@
 import React from "react";
-import styles from "./ButtonElement.module.scss";
+import styles from "./Button.module.scss";
 
-interface iProps {
+interface IProps {
   children?: React.ReactNode;
   type?: "button" | "submit" | "reset" | undefined;
   icon?: React.ReactNode;
   handleClick?: () => void;
 }
 
-const ButtonElement: React.FC<iProps> = ({
+const Button: React.FC<IProps> = ({
   children,
   type,
   icon,
@@ -26,4 +26,4 @@ const ButtonElement: React.FC<iProps> = ({
   );
 };
 
-export default ButtonElement;
+export default Button;

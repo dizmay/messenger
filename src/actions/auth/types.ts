@@ -1,15 +1,14 @@
 const types = {
-  REGISTRATION: 'REGISTRATION',
-  REGISTRATION_SUCCESS: 'REGISTRATION_SUCCESS',
-  REGISTRATION_FAILED: 'REGISTRATION_FAILED',
-  LOGIN: 'LOGIN',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILED: 'LOGIN_FAILED',
-  SET_CURRENT_USER: 'SET_CURRENT_USER',
-  SET_CURRENT_USER_SUCCESS: 'SET_CURRENT_USER_SUCCESS',
-  SET_CURRENT_USER_FAILED: 'SET_CURRENT_USER_FAILED',
-  LOGOUT: 'LOGOUT',
-  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+  REGISTRATION: 'auth/registration',
+  REGISTRATION_SUCCESS: 'auth/registrationSuccess',
+  REGISTRATION_FAILED: 'auth/registrationFailed',
+  LOGIN: 'auth/login',
+  LOGIN_SUCCESS: 'auth/loginSuccess',
+  LOGIN_FAILED: 'auth/loginFailed',
+  SET_CURRENT_USER: 'auth/setCurrentUser',
+  SET_CURRENT_USER_SUCCESS: 'auth/setCurrentUserSuccess',
+  SET_CURRENT_USER_FAILED: 'auth/setCurrentUserFailed',
+  LOGOUT: 'auth/logout',
 }
 
 export default types;

@@ -2,11 +2,11 @@ import React from "react";
 import cn from "classnames";
 import styles from "./Menu.module.scss";
 
-interface iProps {
+interface IProps {
   isMenuVisible: boolean;
 }
 
-const Menu: React.FC<iProps> = ({ isMenuVisible }) => {
+const Menu: React.FC<IProps> = ({ isMenuVisible }) => {
   const menuStyles = cn(styles.menu, {
     [styles.active]: isMenuVisible,
   });

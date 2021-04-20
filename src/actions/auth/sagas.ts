@@ -4,21 +4,11 @@ import { authAPI } from '../../API';
 import {
   setCurrentUserFailed,
   setCurrentUserSuccess,
-  registrationFailed, registrationSuccess, loginSuccess, loginFailed, logoutSuccess,
-} from './actionCreators';
+  registrationFailed, registrationSuccess, loginSuccess, loginFailed,
+} from '../../reducers/authReducer';
 import { setAuthToken } from '../../utils/setAuthToken';
 import types from './types';
-import { getErrorMessage } from '../../utils/getErrorMessage';
-import { LoginData, UserData } from './interfaces';
-
-interface ServerResponse {
-  config?: any,
-  data?: any,
-  headers?: any,
-  request?: any,
-  status?: number,
-  statusText?: string
-}
+import { JwtDecodeType, LoginData, ResponseUserData, UserData } from './interfaces';
 
 interface UserDataPayload {
   type: string
@@ -38,54 +28,46 @@ interface CurrentUserPayload {
 function* registerUser(action: UserDataPayload) {
   try {
     const { payload } = action;
-    const response: ServerResponse = yield call(authAPI.createUser, payload);
-    const token: string = response.data.token;
-    localStorage.setItem('token', token);
-    setAuthToken(token);
-    const decoded: any = decode(token);
-    yield put(registrationSuccess(decoded));
+    const response: string = yield call(authAPI.createUser, payload);
+    localStorage.setItem('token', response);
+    setAuthToken(response);
+    const decoded: JwtDecodeType = decode(response);
+    yield put(registrationSuccess(decoded as ResponseUserData));
+
   }
   catch (error) {
     localStorage.removeItem('token');
-    yield put(registrationFailed(getErrorMessage(error)));
+    yield put(registrationFailed(error));
   }
 }
 
 function* loginUser(action: LoginDataPayload) {
   try {
     const { payload } = action;
-    const response: ServerResponse = yield call(authAPI.loginUser, payload);
-    const token: string = response.data.token;
-    localStorage.setItem('token', token);
-    setAuthToken(token);
-    const decoded: any = decode(token);
-    yield put(loginSuccess(decoded));
+    const response: string = yield call(authAPI.loginUser, payload);
+    localStorage.setItem('token', response);
+    const decoded: JwtDecodeType = decode(response);
+    yield put(loginSuccess(decoded as ResponseUserData));
   }
   catch (error) {
     localStorage.removeItem('token');
-    yield put(loginFailed(getErrorMessage(error)));
+    yield put(loginFailed(error));
   }
 }
 
 function* setCurrentUser(action: CurrentUserPayload) {
   try {
     const { payload } = action;
-    const decoded: any = decode(payload);
-    yield put(setCurrentUserSuccess(decoded));
+    const decoded: JwtDecodeType = decode(payload);
+    yield put(setCurrentUserSuccess(decoded as ResponseUserData));
   }
   catch (error) {
-    yield put(setCurrentUserFailed(error.message));
+    yield put(setCurrentUserFailed());
   }
-}
-
-function* logoutUser() {
-  localStorage.removeItem('token');
-  yield put(logoutSuccess());
 }
 
 export function* watchAuth() {
   yield takeEvery(types.REGISTRATION, registerUser);
   yield takeEvery(types.LOGIN, loginUser);
   yield takeEvery(types.SET_CURRENT_USER, setCurrentUser);
-  yield takeEvery(types.LOGOUT, logoutUser);
 }

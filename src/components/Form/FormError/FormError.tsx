@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './FormError.module.scss';
 
-interface iProps {
+interface IProps {
   message: string
 }
 
-const FormError: React.FC<iProps> = ({ message }) => {
+const FormError: React.FC<IProps> = ({ message }) => {
   return (
     <div className={styles.error}>{message}</div>
   )

@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLogged } from './selectors/auth';
 import { setAuthToken } from './utils/setAuthToken';
-import { setCurrentUser } from './actions/auth/actionCreators';
+import { setCurrentUser } from './reducers/authReducer';
+import { useAppDispatch, useAppSelector } from './store';
 import App from './App';
 import Loader from './components/Loader/Loader';
 
 const AppContainer = () => {
 
-  const isLogged = useSelector(selectIsLogged);
-  const dispatch = useDispatch();
+  const isLogged = useAppSelector(selectIsLogged);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    setAuthToken(token);
-    dispatch(setCurrentUser(token));
+    if (isLogged === null) {
+      const token = localStorage.getItem('token');
+      setAuthToken(token);
+      dispatch(setCurrentUser(token));
+    }
   }, [dispatch, isLogged])
 
   return (

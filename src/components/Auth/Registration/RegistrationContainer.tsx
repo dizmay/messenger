@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { registration } from '../../../actions/auth/actionCreators';
+import { registration } from '../../../reducers/authReducer';
 import { selectIsError, selectIsLoading, selectMessage } from '../../../selectors/auth';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import Registration from './Registration';
 
 interface UserData {
@@ -12,13 +12,13 @@ interface UserData {
 
 const RegistrationContainer: React.FC = () => {
 
-  const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
-  const message = useSelector(selectMessage);
+  const isLoading = useAppSelector(selectIsLoading);
+  const isError = useAppSelector(selectIsError);
+  const message = useAppSelector(selectMessage);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const registerUser = useCallback(
-    (userData: UserData): { type: string, payload: UserData } => dispatch(registration(userData)),
+    (userData: UserData) => dispatch(registration(userData)),
     [dispatch]
   );
 

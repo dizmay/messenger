@@ -1,11 +1,9 @@
-export const getErrorMessage = (error: any) => {
-  const { data } = error.response;
-  switch (data.constructor.name) {
-    case 'Array':
-      const message = data[0][0];
-      return message;
+import { AxiosError } from "axios";
 
-    case 'Object':
-      return data.message;
-  }
+export const getErrorMessage = (error: AxiosError) => {
+  const data = error.response?.data;
+  if (data.message) return data.message;
+  const firstError = data[Object.keys(data)[0]];
+  if(typeof firstError === 'string') return firstError;
+  return firstError[0];
 }

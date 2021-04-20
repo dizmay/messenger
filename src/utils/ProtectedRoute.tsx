@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-interface iProps {
+interface IProps {
   component: React.ElementType;
   isLogged: boolean | null;
   path: string;
   redirect: string;
 }
 
-const ProtectedRoute: React.FC<iProps> = ({
+const ProtectedRoute: React.FC<IProps> = ({
   component: Component,
   isLogged,
   path,

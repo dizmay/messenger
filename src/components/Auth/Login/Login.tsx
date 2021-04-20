@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import FormElement from "../../FormElement/FormElement";
+import { LoginData } from "../../../actions/auth/interfaces";
+import Form from "../../Form/Form";
 import Loader from "../../Loader/Loader";
 import styles from "../Auth.module.scss";
 
-interface iProps {
-  loginUser: any
+interface IProps {
+  loginUser: (loginData: LoginData) => void
   isLoading: boolean
   isError: boolean
   message: string
 }
 
-const Login: React.FC<iProps> = ({ loginUser, isLoading, isError, message }) => {
+const Login: React.FC<IProps> = ({ loginUser, isLoading, isError, message }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,14 +51,14 @@ const Login: React.FC<iProps> = ({ loginUser, isLoading, isError, message }) => 
       {
         isLoading
           ? <Loader />
-          : <FormElement
+          : <Form
             message={message}
             isError={isError}
             formData={formData}
             buttonText="Login"
             handleSubmit={handleSubmit}
             title="Login"
-            linkAfterButton={link}
+            additionalLink={link}
           />
       }
     </div>

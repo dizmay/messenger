@@ -6,14 +6,14 @@ export default function useComponentVisible(initialIsVisible: boolean) {
   );
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleHideDropdown = (event: any): void => {
+  const handleHideDropdown = (event: KeyboardEvent): void => {
     if (event.key === "Escape") {
       setIsComponentVisible(false);
     }
   };
 
-  const handleClickOutside = (event: any): void => {
-    if (ref.current && !ref.current.contains(event.target)) {
+  const handleClickOutside = (event: Event): void => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
       setIsComponentVisible(false);
     }
   };

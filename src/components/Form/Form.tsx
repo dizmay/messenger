@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useComponentVisible from "../../utils/useComponentVisible";
-import ButtonElement from "../ButtonElement/ButtonElement";
+import Button from "../Button/Button";
 import FormError from "./FormError/FormError";
 
-interface inputElem {
+interface Input {
   type?: string
   label: string
   placeholder: string
@@ -12,27 +12,27 @@ interface inputElem {
   valueChange: (event: React.FormEvent<HTMLInputElement>) => void
 }
 
-interface linkAfterButton {
+interface AdditionalLink {
   text: string
   path: string
 }
 
-interface iProps {
-  formData: Array<inputElem>
+interface IProps {
+  formData: Array<Input>
   buttonText: string
   handleSubmit: (e: React.SyntheticEvent) => void
   title?: string
-  linkAfterButton?: linkAfterButton
+  additionalLink?: AdditionalLink
   isError: boolean
   message: string
 }
 
-const FormElement: React.FC<iProps> = ({
+const Form: React.FC<IProps> = ({
   formData,
   buttonText,
   handleSubmit,
   title,
-  linkAfterButton,
+  additionalLink,
   isError,
   message,
 }) => {
@@ -56,12 +56,12 @@ const FormElement: React.FC<iProps> = ({
       <div ref={ref}>
         {(isError && isComponentVisible) && <FormError message={message} />}
       </div>
-      <ButtonElement type="submit" children={buttonText} />
-      {linkAfterButton && (
-        <Link to={linkAfterButton.path}>{linkAfterButton.text}</Link>
+      <Button type="submit" children={buttonText} />
+      {additionalLink && (
+        <Link to={additionalLink.path}>{additionalLink.text}</Link>
       )}
     </form>
   );
 };
 
-export default FormElement;
+export default Form;

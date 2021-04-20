@@ -7,11 +7,11 @@ import RegistrationContainer from "./components/Auth/Registration/RegistrationCo
 import LoginContainer from "./components/Auth/Login/LoginContainer";
 import styles from "./App.module.scss";
 
-interface iProps {
+interface IProps {
   isLogged: boolean | null
 }
 
-const App: React.FC<iProps> = ({ isLogged }) => {
+const App: React.FC<IProps> = ({ isLogged }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const showMenu = () => {
